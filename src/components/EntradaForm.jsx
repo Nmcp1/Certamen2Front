@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { Dropdown } from 'primereact/dropdown';
 import { SelectButton } from 'primereact/selectbutton';
@@ -6,6 +6,7 @@ import { InputNumber } from 'primereact/inputnumber';
 import { InputText } from 'primereact/inputtext';
 import { ListBox } from 'primereact/listbox';
 import { Button } from 'primereact/button';
+import { Messages } from 'primereact/messages';
         
         
 
@@ -15,7 +16,8 @@ function EntradaForm({onCreateEntrada = () =>{}}) {
         const valor = 5000*cantidad;
         const entradaObj = {dia,tipoPago,cantidad,ciudad,pelicula, valor};
         if (!ciudad){
-            alert("Ciudad no ingresada");
+            msgs.current.show([{sticky: true, severity: 'error', summary: 'Error', detail: 'Ciudad no ingresada'}])
+
             return;
         }
         console.log(entradaObj);
@@ -34,8 +36,10 @@ function EntradaForm({onCreateEntrada = () =>{}}) {
     const [cantidad,setCantidad] = useState(0);
     const [ciudad,setCiudad] = useState("");
     const [pelicula,setPelicula] = useState(peliculas[0]);
+    const msgs = useRef(null);
   return (
     <div>
+        <Messages ref={msgs} />
         <div className="row">
         <label>Día</label>
         <Dropdown value={dia} onChange={(e) => setDia(e.value)} options={dias} optionLabel="name" 

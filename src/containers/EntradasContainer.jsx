@@ -6,12 +6,12 @@ import { createEntrada, getEntradas } from '../services/EntradasService';
 import { Toolbar } from 'primereact/toolbar';
 
 function EntradasContainer() {
-    //const toast = useRef(null);
+    const toast = useRef(null);
     const [entradaData,setEntradaData] = useState([]);
 
     const handleCreate=(entrada)=>{
         createEntrada(entrada);
-        //toast.current.show({severity: "success", summary: "Entrada Comprada con Éxito"});
+        toast.current.show({severity: "success", summary: "Entrada Comprada con Éxito"});
         const data = getEntradas();
         setEntradaData(data);
     }
@@ -22,6 +22,7 @@ function EntradasContainer() {
     }, []);
   return (
     <div>
+        <Toast ref={toast} />
         <div className="row">
             <Toolbar left={<h3>Sansamark</h3>}/>
 
