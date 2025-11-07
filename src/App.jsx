@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import EntradasContainer from './containers/EntradasContainer'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -6,7 +7,7 @@ function App() {
   return (
     <>
     <div className="row">
-      <h1>Base Certamen2</h1>
+      <EntradasContainer></EntradasContainer>
     </div>
     </>
   )
